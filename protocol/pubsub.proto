@@ -1,0 +1,167 @@
+
+syntax = "proto3";
+
+package protocol;
+
+service Wormhole {
+    rpc Login(LoginRequest) returns (LoginResponse) {}
+
+    rpc CreateTopic(CreateTopicRequest) returns (CreateTopicResponse) {}
+    rpc DestroyTopic(DestroyTopicRequest) returns (DestroyTopicResponse) {}
+
+    rpc Publish(stream PublishRequest) returns (stream PublishResponse) {}
+
+    rpc Subscribe(stream SubscribeRequest) returns (stream SubscribeResponse) {}
+
+    rpc Status(StatusRequest) returns (StatusResponse) {}
+    rpc Statistics(StatisticsRequest) returns (StatisticsResponse) {}
+}
+
+message LoginRequest {
+    enum Version {
+        VERSION_INVALID = 0;
+        VERSION_CURRENT = 20181205;
+    }
+    Version protocol_version = 1;
+
+    string id = 2;
+    string password = 3;
+
+    enum Role {
+        ROLE_NONE = 0;
+        ROLE_PUBLISHER = 1;
+        ROLE_SUBSCRIBER = 2;
+        ROLE_MONITOR = 4;
+        ROLE_ADMINISTRATOR = 8;
+    }
+    Role role = 4;
+}
+
+message LoginResponse {
+    bool OK = 1;
+    string message = 2;
+
+    string token = 3;
+    string publisher_subscriber_monitor_id = 4;
+
+    message Negotiation {
+        uint32 ping_period = 1; // in seconds
+        uint32 maximum_packet_size = 2; // in bytes
+        uint32 maximum_chunk_size = 3; // in bytes
+    }
+    Negotiation negotiation = 5;
+}
+
+message CreateTopicRequest {
+    string token = 1;
+
+    string topic_name = 2;
+}
+
+message CreateTopicResponse {
+    bool OK = 1;
+    string message = 2;
+}
+
+message DestroyTopicRequest {
+    string token = 1;
+
+    string topic_name = 2;
+}
+
+message DestroyTopicResponse {
+    bool OK = 1;
+    string message = 2;
+}
+
+message PublishRequest {
+    string token = 1;
+
+    string topic_name = 2;
+
+    uint64 unique_sequence_number = 4;
+    bool start = 5;
+    bool end = 6;
+    bytes payload = 7; // this should be chunked in the size of maximum_chunk_size
+    bool EOR = 8; // End-Of-Request
+}
+
+message PublishResponse {
+    bool OK = 1;
+    string message = 2;
+
+    uint64 unique_sequence_number = 4;
+    bool start = 5;
+    bool end = 6;
+    bytes payload = 7; // this should be chunked in the size of maximum_chunk_size
+}
+
+message SubscribeRequest {
+    string token = 1;
+
+    string topic_name = 2;
+
+    uint64 unique_sequence_number = 4;
+    bool start = 5;
+    bool end = 6;
+    bytes payload = 7; // this should be chunked in the size of maximum_chunk_size
+}
+
+message SubscribeResponse {
+    bool OK = 1;
+    string message = 2;
+
+    uint64 unique_sequence_number = 4;
+    bool start = 5;
+    bool end = 6;
+    bytes payload = 7; // this should be chunked in the size of maximum_chunk_size
+}
+
+message StatusRequest {
+    string token = 1;
+}
+
+message StatusResponse {
+    bool OK = 1;
+    string message = 2;
+
+    string created_datetime = 3; // 2006-01-02T15:04:05.000Z07:00
+    string last_used_datetime = 4; // 2006-01-02T15:04:05.000Z07:00
+    uint32 used_memory = 5; // in bytes
+    uint32 total_memory = 6; // in bytes
+    uint32 used_disk = 7; // in bytes
+    uint32 total_disk = 8; // in bytes
+    uint32 number_of_goroutines = 9;
+    uint32 number_of_topics = 10;
+    uint32 number_of_publisher = 11;
+    uint32 number_of_subscriber = 12;
+    uint32 number_of_processed_streams = 13;
+    uint32 number_of_processed_packets = 14;
+    uint32 size_of_processed_packets = 15; // in bytes
+}
+
+message StatisticsRequest {
+    string token = 1;
+}
+
+message StatisticsResponse {
+    bool OK = 1;
+    string message = 2;
+
+    message PublisherSubscriber {
+        uint32 number_of_processed_streams = 2;
+        uint32 number_of_processed_packets = 3;
+    }
+    message Topic {
+        string name = 1;
+        string created_datetime = 2; // 2006-01-02T15:04:05.000Z07:00
+        string last_used_datetime = 3; // 2006-01-02T15:04:05.000Z07:00
+        map<string, PublisherSubscriber> publishers = 4;
+        map<string, PublisherSubscriber> subscribers = 5;
+        uint32 number_of_processed_streams = 6;
+        uint32 number_of_processed_packets = 7;
+        uint32 size_of_processed_packets = 8; // in bytes
+    }
+    repeated Topic topics = 3;
+}
+

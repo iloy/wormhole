@@ -4,6 +4,7 @@ all: wormhole
 SRCS := main.go
 SRCS += version.go
 SRCS += beancounter/*.go
+SRCS += lib/lib.go
 SRCS += protocol/pubsub.pb.go
 SRCS += publisher/*.go 
 SRCS += seqno/*.go 

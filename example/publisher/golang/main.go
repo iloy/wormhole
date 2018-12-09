@@ -20,14 +20,18 @@ var (
 )
 
 func callbackPublisher() (uint64, bool, bool, []byte, error) {
+	var no uint64
 	var start bool
 	var end bool
 	var data []byte
 	var err error
 
+	no = i
+
 	if j == 0 {
 		start = true
 	}
+
 	if j == 9 {
 		end = true
 	}
@@ -47,7 +51,7 @@ func callbackPublisher() (uint64, bool, bool, []byte, error) {
 
 	time.Sleep(time.Millisecond * 100)
 
-	return i, start, end, data, err
+	return no, start, end, data, err
 }
 
 func callbackMsgHandle(msg *protocol.PublishResponse) error {
@@ -56,6 +60,11 @@ func callbackMsgHandle(msg *protocol.PublishResponse) error {
 	if !msg.OK {
 		return errors.New(msg.Message)
 	}
+
+	if msg.UniqueSequenceNumber == 9 {
+		return io.EOF
+	}
+
 	return nil
 }
 
@@ -89,10 +98,11 @@ func main() {
 	}
 
 	if true {
-		log.Println("Publish():", topicName, "by", id)
+		log.Println("Publish() start:", topicName, "by", id)
 		err = lib.Publish(client, 0, token, topicName, callbackPublisher, callbackMsgHandle)
 		if err != nil {
 			panic(err)
 		}
+		log.Println("Publish() end:", topicName, "by", id)
 	}
 }

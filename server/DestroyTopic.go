@@ -34,7 +34,7 @@ func (rs *rpcServer) DestroyTopic(
 	if err != nil {
 		return errorSendFunc(err.Error())
 	}
-	log.Infoln("DestroyTopic():", req.TopicName)
+	log.Infoln("CreateTopic():", req.TopicName, "by", id)
 
 	return &protocol.DestroyTopicResponse{
 		OK:      true,

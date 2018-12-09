@@ -83,7 +83,7 @@ message PublishRequest {
     bool start = 5;
     bool end = 6;
     bytes payload = 7; // this should be chunked in the size of maximum_chunk_size
-    bool EOR = 8; // End-Of-Request
+    //bool EOR = 8; // end-of-request
 }
 
 message PublishResponse {

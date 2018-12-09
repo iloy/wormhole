@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='protocol',
   syntax='proto3',
   serialized_options=None,
-  serialized_pb=_b('\n\x0cpubsub.proto\x12\x08protocol\"\xb3\x02\n\x0cLoginRequest\x12\x38\n\x10protocol_version\x18\x01 \x01(\x0e\x32\x1e.protocol.LoginRequest.Version\x12\n\n\x02id\x18\x02 \x01(\t\x12\x10\n\x08password\x18\x03 \x01(\t\x12)\n\x04role\x18\x04 \x01(\x0e\x32\x1b.protocol.LoginRequest.Role\"6\n\x07Version\x12\x13\n\x0fVERSION_INVALID\x10\x00\x12\x16\n\x0fVERSION_CURRENT\x10\xd5\xe1\xcf\t\"h\n\x04Role\x12\r\n\tROLE_NONE\x10\x00\x12\x12\n\x0eROLE_PUBLISHER\x10\x01\x12\x13\n\x0fROLE_SUBSCRIBER\x10\x02\x12\x10\n\x0cROLE_MONITOR\x10\x04\x12\x16\n\x12ROLE_ADMINISTRATOR\x10\x08\"\xfb\x01\n\rLoginResponse\x12\n\n\x02OK\x18\x01 \x01(\x08\x12\x0f\n\x07message\x18\x02 \x01(\t\x12\r\n\x05token\x18\x03 \x01(\t\x12\'\n\x1fpublisher_subscriber_monitor_id\x18\x04 \x01(\t\x12\x38\n\x0bnegotiation\x18\x05 \x01(\x0b\x32#.protocol.LoginResponse.Negotiation\x1a[\n\x0bNegotiation\x12\x13\n\x0bping_period\x18\x01 \x01(\r\x12\x1b\n\x13maximum_packet_size\x18\x02 \x01(\r\x12\x1a\n\x12maximum_chunk_size\x18\x03 \x01(\r\"7\n\x12\x43reateTopicRequest\x12\r\n\x05token\x18\x01 \x01(\t\x12\x12\n\ntopic_name\x18\x02 \x01(\t\"2\n\x13\x43reateTopicResponse\x12\n\n\x02OK\x18\x01 \x01(\x08\x12\x0f\n\x07message\x18\x02 \x01(\t\"8\n\x13\x44\x65stroyTopicRequest\x12\r\n\x05token\x18\x01 \x01(\t\x12\x12\n\ntopic_name\x18\x02 \x01(\t\"3\n\x14\x44\x65stroyTopicResponse\x12\n\n\x02OK\x18\x01 \x01(\x08\x12\x0f\n\x07message\x18\x02 \x01(\t\"\x8d\x01\n\x0ePublishRequest\x12\r\n\x05token\x18\x01 \x01(\t\x12\x12\n\ntopic_name\x18\x02 \x01(\t\x12\x1e\n\x16unique_sequence_number\x18\x04 \x01(\x04\x12\r\n\x05start\x18\x05 \x01(\x08\x12\x0b\n\x03\x65nd\x18\x06 \x01(\x08\x12\x0f\n\x07payload\x18\x07 \x01(\x0c\x12\x0b\n\x03\x45OR\x18\x08 \x01(\x08\"{\n\x0fPublishResponse\x12\n\n\x02OK\x18\x01 \x01(\x08\x12\x0f\n\x07message\x18\x02 \x01(\t\x12\x1e\n\x16unique_sequence_number\x18\x04 \x01(\x04\x12\r\n\x05start\x18\x05 \x01(\x08\x12\x0b\n\x03\x65nd\x18\x06 \x01(\x08\x12\x0f\n\x07payload\x18\x07 \x01(\x0c\"\x82\x01\n\x10SubscribeRequest\x12\r\n\x05token\x18\x01 \x01(\t\x12\x12\n\ntopic_name\x18\x02 \x01(\t\x12\x1e\n\x16unique_sequence_number\x18\x04 \x01(\x04\x12\r\n\x05start\x18\x05 \x01(\x08\x12\x0b\n\x03\x65nd\x18\x06 \x01(\x08\x12\x0f\n\x07payload\x18\x07 \x01(\x0c\"}\n\x11SubscribeResponse\x12\n\n\x02OK\x18\x01 \x01(\x08\x12\x0f\n\x07message\x18\x02 \x01(\t\x12\x1e\n\x16unique_sequence_number\x18\x04 \x01(\x04\x12\r\n\x05start\x18\x05 \x01(\x08\x12\x0b\n\x03\x65nd\x18\x06 \x01(\x08\x12\x0f\n\x07payload\x18\x07 \x01(\x0c\"\x1e\n\rStatusRequest\x12\r\n\x05token\x18\x01 \x01(\t\"\x95\x03\n\x0eStatusResponse\x12\n\n\x02OK\x18\x01 \x01(\x08\x12\x0f\n\x07message\x18\x02 \x01(\t\x12\x18\n\x10\x63reated_datetime\x18\x03 \x01(\t\x12\x1a\n\x12last_used_datetime\x18\x04 \x01(\t\x12\x13\n\x0bused_memory\x18\x05 \x01(\r\x12\x14\n\x0ctotal_memory\x18\x06 \x01(\r\x12\x11\n\tused_disk\x18\x07 \x01(\r\x12\x12\n\ntotal_disk\x18\x08 \x01(\r\x12\x1c\n\x14number_of_goroutines\x18\t \x01(\r\x12\x18\n\x10number_of_topics\x18\n \x01(\r\x12\x1b\n\x13number_of_publisher\x18\x0b \x01(\r\x12\x1c\n\x14number_of_subscriber\x18\x0c \x01(\r\x12#\n\x1bnumber_of_processed_streams\x18\r \x01(\r\x12#\n\x1bnumber_of_processed_packets\x18\x0e \x01(\r\x12!\n\x19size_of_processed_packets\x18\x0f \x01(\r\"\"\n\x11StatisticsRequest\x12\r\n\x05token\x18\x01 \x01(\t\"\xde\x05\n\x12StatisticsResponse\x12\n\n\x02OK\x18\x01 \x01(\x08\x12\x0f\n\x07message\x18\x02 \x01(\t\x12\x32\n\x06topics\x18\x03 \x03(\x0b\x32\".protocol.StatisticsResponse.Topic\x1a_\n\x13PublisherSubscriber\x12#\n\x1bnumber_of_processed_streams\x18\x02 \x01(\r\x12#\n\x1bnumber_of_processed_packets\x18\x03 \x01(\r\x1a\x95\x04\n\x05Topic\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x18\n\x10\x63reated_datetime\x18\x02 \x01(\t\x12\x1a\n\x12last_used_datetime\x18\x03 \x01(\t\x12\x46\n\npublishers\x18\x04 \x03(\x0b\x32\x32.protocol.StatisticsResponse.Topic.PublishersEntry\x12H\n\x0bsubscribers\x18\x05 \x03(\x0b\x32\x33.protocol.StatisticsResponse.Topic.SubscribersEntry\x12#\n\x1bnumber_of_processed_streams\x18\x06 \x01(\r\x12#\n\x1bnumber_of_processed_packets\x18\x07 \x01(\r\x12!\n\x19size_of_processed_packets\x18\x08 \x01(\r\x1a\x63\n\x0fPublishersEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12?\n\x05value\x18\x02 \x01(\x0b\x32\x30.protocol.StatisticsResponse.PublisherSubscriber:\x02\x38\x01\x1a\x64\n\x10SubscribersEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12?\n\x05value\x18\x02 \x01(\x0b\x32\x30.protocol.StatisticsResponse.PublisherSubscriber:\x02\x38\x01\x32\x81\x04\n\x08Wormhole\x12:\n\x05Login\x12\x16.protocol.LoginRequest\x1a\x17.protocol.LoginResponse\"\x00\x12L\n\x0b\x43reateTopic\x12\x1c.protocol.CreateTopicRequest\x1a\x1d.protocol.CreateTopicResponse\"\x00\x12O\n\x0c\x44\x65stroyTopic\x12\x1d.protocol.DestroyTopicRequest\x1a\x1e.protocol.DestroyTopicResponse\"\x00\x12\x44\n\x07Publish\x12\x18.protocol.PublishRequest\x1a\x19.protocol.PublishResponse\"\x00(\x01\x30\x01\x12J\n\tSubscribe\x12\x1a.protocol.SubscribeRequest\x1a\x1b.protocol.SubscribeResponse\"\x00(\x01\x30\x01\x12=\n\x06Status\x12\x17.protocol.StatusRequest\x1a\x18.protocol.StatusResponse\"\x00\x12I\n\nStatistics\x12\x1b.protocol.StatisticsRequest\x1a\x1c.protocol.StatisticsResponse\"\x00\x62\x06proto3')
+  serialized_pb=_b('\n\x0cpubsub.proto\x12\x08protocol\"\xb3\x02\n\x0cLoginRequest\x12\x38\n\x10protocol_version\x18\x01 \x01(\x0e\x32\x1e.protocol.LoginRequest.Version\x12\n\n\x02id\x18\x02 \x01(\t\x12\x10\n\x08password\x18\x03 \x01(\t\x12)\n\x04role\x18\x04 \x01(\x0e\x32\x1b.protocol.LoginRequest.Role\"6\n\x07Version\x12\x13\n\x0fVERSION_INVALID\x10\x00\x12\x16\n\x0fVERSION_CURRENT\x10\xd5\xe1\xcf\t\"h\n\x04Role\x12\r\n\tROLE_NONE\x10\x00\x12\x12\n\x0eROLE_PUBLISHER\x10\x01\x12\x13\n\x0fROLE_SUBSCRIBER\x10\x02\x12\x10\n\x0cROLE_MONITOR\x10\x04\x12\x16\n\x12ROLE_ADMINISTRATOR\x10\x08\"\xfb\x01\n\rLoginResponse\x12\n\n\x02OK\x18\x01 \x01(\x08\x12\x0f\n\x07message\x18\x02 \x01(\t\x12\r\n\x05token\x18\x03 \x01(\t\x12\'\n\x1fpublisher_subscriber_monitor_id\x18\x04 \x01(\t\x12\x38\n\x0bnegotiation\x18\x05 \x01(\x0b\x32#.protocol.LoginResponse.Negotiation\x1a[\n\x0bNegotiation\x12\x13\n\x0bping_period\x18\x01 \x01(\r\x12\x1b\n\x13maximum_packet_size\x18\x02 \x01(\r\x12\x1a\n\x12maximum_chunk_size\x18\x03 \x01(\r\"7\n\x12\x43reateTopicRequest\x12\r\n\x05token\x18\x01 \x01(\t\x12\x12\n\ntopic_name\x18\x02 \x01(\t\"2\n\x13\x43reateTopicResponse\x12\n\n\x02OK\x18\x01 \x01(\x08\x12\x0f\n\x07message\x18\x02 \x01(\t\"8\n\x13\x44\x65stroyTopicRequest\x12\r\n\x05token\x18\x01 \x01(\t\x12\x12\n\ntopic_name\x18\x02 \x01(\t\"3\n\x14\x44\x65stroyTopicResponse\x12\n\n\x02OK\x18\x01 \x01(\x08\x12\x0f\n\x07message\x18\x02 \x01(\t\"\x80\x01\n\x0ePublishRequest\x12\r\n\x05token\x18\x01 \x01(\t\x12\x12\n\ntopic_name\x18\x02 \x01(\t\x12\x1e\n\x16unique_sequence_number\x18\x04 \x01(\x04\x12\r\n\x05start\x18\x05 \x01(\x08\x12\x0b\n\x03\x65nd\x18\x06 \x01(\x08\x12\x0f\n\x07payload\x18\x07 \x01(\x0c\"{\n\x0fPublishResponse\x12\n\n\x02OK\x18\x01 \x01(\x08\x12\x0f\n\x07message\x18\x02 \x01(\t\x12\x1e\n\x16unique_sequence_number\x18\x04 \x01(\x04\x12\r\n\x05start\x18\x05 \x01(\x08\x12\x0b\n\x03\x65nd\x18\x06 \x01(\x08\x12\x0f\n\x07payload\x18\x07 \x01(\x0c\"\x82\x01\n\x10SubscribeRequest\x12\r\n\x05token\x18\x01 \x01(\t\x12\x12\n\ntopic_name\x18\x02 \x01(\t\x12\x1e\n\x16unique_sequence_number\x18\x04 \x01(\x04\x12\r\n\x05start\x18\x05 \x01(\x08\x12\x0b\n\x03\x65nd\x18\x06 \x01(\x08\x12\x0f\n\x07payload\x18\x07 \x01(\x0c\"}\n\x11SubscribeResponse\x12\n\n\x02OK\x18\x01 \x01(\x08\x12\x0f\n\x07message\x18\x02 \x01(\t\x12\x1e\n\x16unique_sequence_number\x18\x04 \x01(\x04\x12\r\n\x05start\x18\x05 \x01(\x08\x12\x0b\n\x03\x65nd\x18\x06 \x01(\x08\x12\x0f\n\x07payload\x18\x07 \x01(\x0c\"\x1e\n\rStatusRequest\x12\r\n\x05token\x18\x01 \x01(\t\"\x95\x03\n\x0eStatusResponse\x12\n\n\x02OK\x18\x01 \x01(\x08\x12\x0f\n\x07message\x18\x02 \x01(\t\x12\x18\n\x10\x63reated_datetime\x18\x03 \x01(\t\x12\x1a\n\x12last_used_datetime\x18\x04 \x01(\t\x12\x13\n\x0bused_memory\x18\x05 \x01(\r\x12\x14\n\x0ctotal_memory\x18\x06 \x01(\r\x12\x11\n\tused_disk\x18\x07 \x01(\r\x12\x12\n\ntotal_disk\x18\x08 \x01(\r\x12\x1c\n\x14number_of_goroutines\x18\t \x01(\r\x12\x18\n\x10number_of_topics\x18\n \x01(\r\x12\x1b\n\x13number_of_publisher\x18\x0b \x01(\r\x12\x1c\n\x14number_of_subscriber\x18\x0c \x01(\r\x12#\n\x1bnumber_of_processed_streams\x18\r \x01(\r\x12#\n\x1bnumber_of_processed_packets\x18\x0e \x01(\r\x12!\n\x19size_of_processed_packets\x18\x0f \x01(\r\"\"\n\x11StatisticsRequest\x12\r\n\x05token\x18\x01 \x01(\t\"\xde\x05\n\x12StatisticsResponse\x12\n\n\x02OK\x18\x01 \x01(\x08\x12\x0f\n\x07message\x18\x02 \x01(\t\x12\x32\n\x06topics\x18\x03 \x03(\x0b\x32\".protocol.StatisticsResponse.Topic\x1a_\n\x13PublisherSubscriber\x12#\n\x1bnumber_of_processed_streams\x18\x02 \x01(\r\x12#\n\x1bnumber_of_processed_packets\x18\x03 \x01(\r\x1a\x95\x04\n\x05Topic\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x18\n\x10\x63reated_datetime\x18\x02 \x01(\t\x12\x1a\n\x12last_used_datetime\x18\x03 \x01(\t\x12\x46\n\npublishers\x18\x04 \x03(\x0b\x32\x32.protocol.StatisticsResponse.Topic.PublishersEntry\x12H\n\x0bsubscribers\x18\x05 \x03(\x0b\x32\x33.protocol.StatisticsResponse.Topic.SubscribersEntry\x12#\n\x1bnumber_of_processed_streams\x18\x06 \x01(\r\x12#\n\x1bnumber_of_processed_packets\x18\x07 \x01(\r\x12!\n\x19size_of_processed_packets\x18\x08 \x01(\r\x1a\x63\n\x0fPublishersEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12?\n\x05value\x18\x02 \x01(\x0b\x32\x30.protocol.StatisticsResponse.PublisherSubscriber:\x02\x38\x01\x1a\x64\n\x10SubscribersEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12?\n\x05value\x18\x02 \x01(\x0b\x32\x30.protocol.StatisticsResponse.PublisherSubscriber:\x02\x38\x01\x32\x81\x04\n\x08Wormhole\x12:\n\x05Login\x12\x16.protocol.LoginRequest\x1a\x17.protocol.LoginResponse\"\x00\x12L\n\x0b\x43reateTopic\x12\x1c.protocol.CreateTopicRequest\x1a\x1d.protocol.CreateTopicResponse\"\x00\x12O\n\x0c\x44\x65stroyTopic\x12\x1d.protocol.DestroyTopicRequest\x1a\x1e.protocol.DestroyTopicResponse\"\x00\x12\x44\n\x07Publish\x12\x18.protocol.PublishRequest\x1a\x19.protocol.PublishResponse\"\x00(\x01\x30\x01\x12J\n\tSubscribe\x12\x1a.protocol.SubscribeRequest\x1a\x1b.protocol.SubscribeResponse\"\x00(\x01\x30\x01\x12=\n\x06Status\x12\x17.protocol.StatusRequest\x1a\x18.protocol.StatusResponse\"\x00\x12I\n\nStatistics\x12\x1b.protocol.StatisticsRequest\x1a\x1c.protocol.StatisticsResponse\"\x00\x62\x06proto3')
 )
 
 
@@ -439,13 +439,6 @@ _PUBLISHREQUEST = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='EOR', full_name='protocol.PublishRequest.EOR', index=6,
-      number=8, type=8, cpp_type=7, label=1,
-      has_default_value=False, default_value=False,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
   ],
   extensions=[
   ],
@@ -459,7 +452,7 @@ _PUBLISHREQUEST = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=811,
-  serialized_end=952,
+  serialized_end=939,
 )
 
 
@@ -524,8 +517,8 @@ _PUBLISHRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=954,
-  serialized_end=1077,
+  serialized_start=941,
+  serialized_end=1064,
 )
 
 
@@ -590,8 +583,8 @@ _SUBSCRIBEREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1080,
-  serialized_end=1210,
+  serialized_start=1067,
+  serialized_end=1197,
 )
 
 
@@ -656,8 +649,8 @@ _SUBSCRIBERESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1212,
-  serialized_end=1337,
+  serialized_start=1199,
+  serialized_end=1324,
 )
 
 
@@ -687,8 +680,8 @@ _STATUSREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1339,
-  serialized_end=1369,
+  serialized_start=1326,
+  serialized_end=1356,
 )
 
 
@@ -816,8 +809,8 @@ _STATUSRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1372,
-  serialized_end=1777,
+  serialized_start=1359,
+  serialized_end=1764,
 )
 
 
@@ -847,8 +840,8 @@ _STATISTICSREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1779,
-  serialized_end=1813,
+  serialized_start=1766,
+  serialized_end=1800,
 )
 
 
@@ -885,8 +878,8 @@ _STATISTICSRESPONSE_PUBLISHERSUBSCRIBER = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1919,
-  serialized_end=2014,
+  serialized_start=1906,
+  serialized_end=2001,
 )
 
 _STATISTICSRESPONSE_TOPIC_PUBLISHERSENTRY = _descriptor.Descriptor(
@@ -922,8 +915,8 @@ _STATISTICSRESPONSE_TOPIC_PUBLISHERSENTRY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2349,
-  serialized_end=2448,
+  serialized_start=2336,
+  serialized_end=2435,
 )
 
 _STATISTICSRESPONSE_TOPIC_SUBSCRIBERSENTRY = _descriptor.Descriptor(
@@ -959,8 +952,8 @@ _STATISTICSRESPONSE_TOPIC_SUBSCRIBERSENTRY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2450,
-  serialized_end=2550,
+  serialized_start=2437,
+  serialized_end=2537,
 )
 
 _STATISTICSRESPONSE_TOPIC = _descriptor.Descriptor(
@@ -1038,8 +1031,8 @@ _STATISTICSRESPONSE_TOPIC = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2017,
-  serialized_end=2550,
+  serialized_start=2004,
+  serialized_end=2537,
 )
 
 _STATISTICSRESPONSE = _descriptor.Descriptor(
@@ -1082,8 +1075,8 @@ _STATISTICSRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1816,
-  serialized_end=2550,
+  serialized_start=1803,
+  serialized_end=2537,
 )
 
 _LOGINREQUEST.fields_by_name['protocol_version'].enum_type = _LOGINREQUEST_VERSION
@@ -1265,8 +1258,8 @@ _WORMHOLE = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=0,
   serialized_options=None,
-  serialized_start=2553,
-  serialized_end=3066,
+  serialized_start=2540,
+  serialized_end=3053,
   methods=[
   _descriptor.MethodDescriptor(
     name='Login',

@@ -153,18 +153,26 @@ func Publish(
 				return
 			}
 			if err != nil {
+				exitReceiver <- errors.New("stream.Recv() error: " + err.Error())
 				return
 			}
 			if msg == nil {
+				exitReceiver <- errors.New("invalid nil message")
 				return
 			}
 			if !msg.OK {
+				// TODO?
+				// wrap this error?
 				exitReceiver <- errors.New(msg.Message)
 				return
 			}
 
 			err = dataRecvFunc(msg)
-			if err != nil {
+			if err != nil && err != io.EOF {
+				exitReceiver <- errors.New("dataRecvFunc() error: " + err.Error())
+				return
+			}
+			if err == io.EOF {
 				return
 			}
 		}
@@ -190,12 +198,11 @@ func Publish(
 				Start:                start,
 				End:                  end,
 				Payload:              data,
-				EOR:                  err == io.EOF,
 			}
 
 			err2 := stream.Send(req)
 			if err2 != nil {
-				return err2
+				return errors.New("stream.Send() error: " + err2.Error())
 			}
 		}
 
@@ -223,20 +230,23 @@ func Subscribe(
 
 	stream, err := client.Subscribe(ctx)
 	if err != nil {
-		return err
+		return errors.New("client.Subscribe() error: " + err.Error())
 	}
 
 	err = stream.Send(&protocol.SubscribeRequest{
 		Token:     token,
 		TopicName: topicName,
 	})
+	if err != nil {
+		return errors.New("stream.Send() error: " + err.Error())
+	}
 
 	// FIXME
 	// parallelize between stream.Recv() and dataReceiveFunc()
 	for {
 		msg, err := stream.Recv()
 		if err != nil {
-			return err
+			return errors.New("stream.Recv() error: " + err.Error())
 		}
 		if !msg.OK {
 			return errors.New(msg.Message)
@@ -249,7 +259,7 @@ func Subscribe(
 		if req != nil {
 			err := stream.Send(req)
 			if err != nil {
-				return err
+				return errors.New("stream.Send() error: " + err.Error())
 			}
 		}
 	}

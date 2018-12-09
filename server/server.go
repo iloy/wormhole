@@ -81,5 +81,6 @@ func (ss *StreamingServer) Serve() error {
 
 // Stop :
 func (ss *StreamingServer) Stop() {
-	ss.server.GracefulStop()
+	//ss.server.GracefulStop()
+	ss.server.Stop()
 }

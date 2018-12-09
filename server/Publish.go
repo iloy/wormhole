@@ -85,11 +85,18 @@ func (rs *rpcServer) Publish(
 				goto finalize
 			}
 
+			/*
+				if msg.EOR {
+					goto finalize
+				}
+			*/
+
 			err = topic.SendToSubscriber(msg.UniqueSequenceNumber, msg.Start, msg.End, msg.Payload)
 			if err != nil {
 				_ = errorSendFunc(err.Error())
-				//goto finalize
+				goto finalize
 			}
+
 		}
 	}
 
